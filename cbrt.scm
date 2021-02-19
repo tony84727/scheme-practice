@@ -1,0 +1,11 @@
+(include "common-math.scm")
+(define (cbrt x)
+  (define (cube-iter guess)
+    (if (good-enough? guess)
+	guess
+	(cube-iter (improve guess))))
+  (define (good-enough? guess)
+    (< (abs (- (cube guess) x)) 0.001))
+  (define (improve guess)
+    (/  (+  (/ x (square guess)) (* 2 guess)) 3))
+  (cube-iter 1))
